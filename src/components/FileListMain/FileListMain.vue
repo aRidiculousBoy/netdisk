@@ -220,6 +220,7 @@ export default defineComponent({
         store.dispatch('file/recoverFileAction', payload.id)
       }
     }
+
     return {
       scrollHeight,
       fileDialogVisible,

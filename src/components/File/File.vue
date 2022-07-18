@@ -7,10 +7,12 @@
         style="display: block; width: 108px; height: 102px" />
       <img v-if="fileInfo.fileType === '.txt'" src="../../assets/svgs/txt.svg"
         style="display: block; width: 108px; height: 102px" />
-      <img v-if="fileInfo.fileType === '.jpg'" src="../../assets/svgs/jpg.svg"
-        style="display: block; width: 108px; height: 102px" />
+
       <img v-if="fileInfo.fileType === '.mp4'" src="../../assets/svgs/mp4.svg"
         style="display: block; width: 108px; height: 102px" />
+      <el-image v-if="fileInfo.fileType" ref="viewerRef" style="display: block; width: 108px; height: 102px"
+        :src="resourceUrl" :preview-src-list="[resourceUrl]">
+      </el-image>
       <img v-if="fileInfo.fileType === '.png'" src="../../assets/svgs/png.svg"
         style="display: block; width: 108px; height: 102px" draggable="false" />
       <img v-if="fileInfo.fileType === '.pdf'" src="../../assets/svgs/pdf.svg"
@@ -32,6 +34,8 @@ import { defineComponent, ref, shallowRef, watch } from 'vue'
 import { menusEvent } from 'vue3-menus'
 import { fileSizeFormat, fileNameFormat } from '@/utils/format.js'
 import { useStore } from 'vuex'
+import { usePreviewFile } from '@/hooks/usePreviewFile.js'
+const defaultUrl = require('../../assets/svgs/jpg.svg')
 
 export default defineComponent({
   name: 'File',
@@ -54,6 +58,13 @@ export default defineComponent({
     const isFolder = !!file.folderId
     const rawName = isFolder ? ref(file.folderName) : ref(file.fileName)
     const useFileName = isFolder ? ref(file.folderName) : ref(file.fileName)
+    const resourceUrl = ref(defaultUrl)
+    const viewerRef = ref(null)
+    if (file.fileType === '.jpg') {
+      usePreviewFile(file.fileType, file.fileId).then(res => {
+        resourceUrl.value = res
+      })
+    }
     watch(
       () => (isFolder ? file.folderName : file.fileName),
       () => {
@@ -249,7 +260,9 @@ export default defineComponent({
       fileDragOverHandler,
       fileDragLeaveHandler,
       fileDropHandler,
-      contextMenuHandler
+      contextMenuHandler,
+      resourceUrl,
+      viewerRef
     }
   }
 })

@@ -123,3 +123,15 @@ export function recoverFileRequest(resourceId) {
     url: FileAPIS.RecoverFileAPI + resourceId
   })
 }
+
+// 获取文件二进制流
+export function getFileBuffer(fileId) {
+  return wRequest.get({
+    url: FileAPIS.DownloadFileAPI + fileId,
+    responseType: 'blob',
+    headers: {
+      Accept: 'application/octet-stream'
+    },
+    timeout: Infinity
+  })
+}

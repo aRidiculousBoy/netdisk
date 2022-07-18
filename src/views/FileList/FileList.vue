@@ -59,6 +59,7 @@ export default defineComponent({
         router.push('/home/filelist/' + payload.folderId)
       } else {
         // 执行预览操作
+        console.log('执行预览操作')
       }
     }
 

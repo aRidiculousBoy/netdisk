@@ -1,10 +1,6 @@
 module.exports = {
   root: true,
-  extends: [
-    'standard',
-    'eslint:recommended',
-    'plugin:vue/recommended'
-  ],
+  extends: ['standard', 'eslint:recommended', 'plugin:vue/recommended'],
   parserOptions: {
     parser: 'babel-eslint',
     ecmaVersion: 7,
@@ -24,6 +20,7 @@ module.exports = {
     'vue/no-v-model-argument': 'off',
     'no-useless-return': 'off',
     'no-debugger': 'off',
-    'eqeqeq': 'off'
+    eqeqeq: 'off',
+    'no-unused-vars': 'off'
   }
 }

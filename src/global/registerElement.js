@@ -31,7 +31,7 @@ import {
   ElCollapseItem,
   ElScrollbar,
   ElEmpty,
-  ElSkeleton
+  ElImage
 } from 'element-plus'
 
 const elementplusComponents = [
@@ -69,7 +69,7 @@ const elementplusComponents = [
   ElProgress,
   ElScrollbar,
   ElEmpty,
-  ElSkeleton
+  ElImage
 ]
 
 export default function registerElement(app) {
